@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Picker } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Picker, Alert } from 'react-native';
 import { Calendar } from 'expo'
 import CalendarPicker from 'react-native-calendar-picker';
 import { When, Unless } from './conditionals.js';
@@ -14,7 +14,8 @@ export default class Form extends React.Component {
       plant: '',
       permissions: false,
       startDate: null,
-      condition: false
+      condition: false,
+      recurrance: ''
     };
     this.onDateChange = this.onDateChange.bind(this);
   }
@@ -31,20 +32,31 @@ export default class Form extends React.Component {
   }
 
   setCalendar = async () => {
+    if(this.state.schedule === 'weekly'){
+      let date = this.state.startDate.setDate(this.state.startDate.getDate() + 14);
+      console.log(date);
+      this.setState({recurrance: date});
+      console.log('recurrance', this.state.recurrance);
+    }
     console.log(this.state);
 
     details = {
-      title: this.state.plant, 
-      startDate: new Date('2019-02-20'), 
-      endDate: new Date('2019-02-20'),
+      title: `Water ${this.state.plant}`, 
+      startDate: this.state.startDate, 
+      endDate: this.state.startDate,
       allDay: true
     };
 
     try{
       let calendars = await Calendar.getCalendarsAsync();
-      console.log(Calendar.DEFAULT);
       let status = await Calendar.createEventAsync(Calendar.DEFAULT, details);
       console.log(status);
+      if(status){
+        Alert.alert(`Water schedule for ${this.state.plant} added to Calendar!`);
+      condition: false,
+      this.setState({condition: false});
+      console.log(this.state.condition);
+      }
 
     } catch(error){
       console.log(error);
@@ -80,7 +92,7 @@ export default class Form extends React.Component {
         <When condition={this.state.condition}>
          < Picker style={styles.picker} 
                 selectedValue={this.state.schedule} 
-                onValueChange={(itemValue, itemIndex) => this.setState({...this.state, schedule: itemValue})}>
+                onValueChange={(itemValue, itemIndex) => this.setState({schedule: itemValue})}>
 
           <Picker.Item  label='Weekly' value='weekly'/>
           <Picker.Item  label='Bi-Monthly' value='bimonthly'/>
@@ -108,7 +120,7 @@ const styles = StyleSheet.create({
     color: 'black',
     paddingBottom: 10,
     marginBottom: 20,
-    marginLeft: 30,
+    marginLeft: 15,
     marginTop: 50,
     borderBottomColor: '#bfdc36',
     borderBottomWidth: 1,
@@ -118,14 +130,14 @@ const styles = StyleSheet.create({
     color: 'black',
     paddingBottom: 10,
     marginBottom: 50,
-    marginLeft: 30,
+    marginLeft: 15,
     borderBottomColor: '#bfdc36',
     borderBottomWidth: 1,
   },
   textInput: {
     alignSelf: 'stretch',
     height: 40,
-    marginLeft: 30,
+    marginLeft: 15,
     marginBottom: 30,
     color: 'black',
     borderBottomColor: '#bfdc36',
@@ -141,10 +153,5 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  // picker: {
-  //   marginTop: 10,
-  //   marginBottom: 50,
-  //   height: 80,
-  // }
 });
 
