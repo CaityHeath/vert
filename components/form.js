@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Picker, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Picker, Alert, ImageBackground } from 'react-native';
 import { Calendar } from 'expo'
 import CalendarPicker from 'react-native-calendar-picker';
 import { When, Unless } from './conditionals.js';
@@ -53,9 +53,9 @@ export default class Form extends React.Component {
       console.log(status);
       if(status){
         Alert.alert(`Water schedule for ${this.state.plant} added to Calendar!`);
-      condition: false,
-      this.setState({condition: false});
-      console.log(this.state.condition);
+      //condition: false,
+      //this.setState({condition: false});
+      //console.log(this.state.condition);
       }
 
     } catch(error){
@@ -71,6 +71,8 @@ export default class Form extends React.Component {
     console.log(this.state.startDate);
 
     return (
+     <> 
+      <ImageBackground source={require('../assets/plant-op.png')} style={{width: 400}} >
       <View style={styles.form}>
 
         <Unless condition={this.state.condition}>
@@ -92,7 +94,10 @@ export default class Form extends React.Component {
         <When condition={this.state.condition}>
          < Picker style={styles.picker} 
                 selectedValue={this.state.schedule} 
-                onValueChange={(itemValue, itemIndex) => this.setState({schedule: itemValue})}>
+                onValueChange={(itemValue, itemIndex) => {
+                  this.setState({schedule: itemValue})
+                }
+                }>
 
           <Picker.Item  label='Weekly' value='weekly'/>
           <Picker.Item  label='Bi-Monthly' value='bimonthly'/>
@@ -107,6 +112,8 @@ export default class Form extends React.Component {
         </When>
 
       </View>
+      </ ImageBackground>
+      </>
     );
   }
 }
