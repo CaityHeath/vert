@@ -15,12 +15,12 @@ Vert is a tool that will help you manage the watering and care needs of your hou
 Written in React Native, styled with SASS.
 
 ### Issues
-✅ Add plant form input
-✅ Set date calendar
-✅ Reqularity picker
-✅ Access calendar
-✅ Adds watering events to calendar
-⭕️ Adds watering events to calendar based off chosed regularity
-⭕️ Plant API providing instructions based off of plant type
-⭕️ Saved plants easily accessible to users
+✅ Add plant form input <br>
+✅ Set date calendar <br>
+✅ Reqularity picker <br>
+✅ Access calendar <br>
+✅ Adds watering events to calendar <br>
+⭕️ Adds watering events to calendar based off chosed regularity <br>
+⭕️ Plant API providing instructions based off of plant type <br>
+⭕️ Saved plants easily accessible to users <br>
 ⭕️ Signin 
