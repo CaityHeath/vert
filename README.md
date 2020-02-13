@@ -20,7 +20,7 @@ Written in React Native, styled with SASS.
 ✅ Reqularity picker <br>
 ✅ Access calendar <br>
 ✅ Adds watering events to calendar <br>
-⭕️ Adds watering events to calendar based off chosed regularity <br>
+⭕️ Adds watering events to calendar based off chosen regularity <br>
 ⭕️ Plant API providing instructions based off of plant type <br>
 ⭕️ Saved plants easily accessible to users <br>
 ⭕️ Signin 
